@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.hs</groupId>
-	<artifactId>spring-reactive-one</artifactId>
+	<artifactId>reactive</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>reactive</name>
 	<description>Spring Boot Reactive</description>
