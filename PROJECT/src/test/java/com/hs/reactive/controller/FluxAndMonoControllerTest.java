@@ -82,7 +82,7 @@ public class FluxAndMonoControllerTest {
 		
 		List<Integer> expectedList = Arrays.asList(1,2,3,4); 
 		
-		EntityExchangeResult<List<Integer>> entityExchangeResult = webTestClient.get().uri("/flux")
+		webTestClient.get().uri("/flux")
 		.accept(MediaType.APPLICATION_JSON_UTF8)
 		.exchange()
 		.expectStatus().isOk()
@@ -90,6 +90,25 @@ public class FluxAndMonoControllerTest {
 		.consumeWith((response) -> {
 			assertEquals(expectedList, response.getResponseBody());
 		});
+		
+	}
+	
+	@Test
+	public void fluxStreamInfinite_1() {
+		
+		Flux<Long> longStreamFlux = webTestClient.get().uri("/flux-stream-infnite-long")
+				.accept(MediaType.APPLICATION_JSON)
+				.exchange()
+				.expectStatus().isOk()
+				.returnResult(Long.class)
+				.getResponseBody();
+		
+		StepVerifier.create(longStreamFlux)
+			.expectNext(0L)
+			.expectNext(1L)
+			.expectNext(2L)
+			.thenCancel()
+			.verify();
 		
 	}
 	

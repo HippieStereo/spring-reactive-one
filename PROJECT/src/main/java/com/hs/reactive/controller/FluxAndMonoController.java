@@ -29,4 +29,12 @@ public class FluxAndMonoController {
 		
 	}
 	
+	@GetMapping(value = "/flux-stream-infnite-long", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+	public Flux<Long> returnFluxStreamInfiniteLong(){
+		
+		return Flux.interval(Duration.ofSeconds(1))
+				.log();
+		
+	}
+	
 }
